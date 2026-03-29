@@ -1,0 +1,29 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        euclid = lambda k: k[0]*k[0] + k[1]*k[1]
+        
+        def partition(l,r):
+            pivotIdx = r
+            pivotDis = euclid(points[pivotIdx])
+
+            left = l
+            for i in range(l,r):
+                if euclid(points[i]) < pivotDis:
+                    points[left], points[i] = points[i], points[left]
+                    left += 1
+            
+            points[left], points[r] = points[r], points[left]
+            return left
+        
+
+        L, R = 0, len(points)-1
+        pivot = len(points)
+
+        while pivot != k:
+            pivot = partition(L,R)
+            if pivot < k:
+                L = pivot + 1
+            else:
+                R = pivot - 1
+        
+        return points[:pivot]

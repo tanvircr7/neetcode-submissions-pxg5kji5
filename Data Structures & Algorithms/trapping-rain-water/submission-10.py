@@ -1,0 +1,53 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        ans = 0
+        h = height
+        # leftMax = [0 for i in range(len(h))]
+        # rightMax = [0 for i in range(len(h))]
+
+        # leftMax[0] = 0
+        # for i in range(1,len(h)):
+        #     leftMax[i] = max(leftMax[i-1], h[i-1])
+
+
+
+        # rightMax[len(h)-1] = 0
+        # for i in range(len(h)-2, 0, -1):
+        #     rightMax[i] = max(rightMax[i+1], h[i+1])
+
+        
+        # for i in range(len(h)):
+        #     tmp = min(leftMax[i], rightMax[i])
+        #     tmp = tmp - h[i]
+        #     ans += max(0, tmp)
+        
+        # return ans 
+        
+        l, r= 0, len(h)-1
+        maxL, maxR = 0,0
+        while l<=r:
+            if maxL <= maxR:
+                tmp = maxL - h[l]
+                ans += max(0, tmp)
+                maxL = max(maxL, h[l])
+                l+=1
+            else:
+                tmp = maxR - h[r]
+                ans += max(0, tmp)
+                maxR = max(maxR, h[r])
+                r-=1
+        
+        return ans
+
+
+        
+
+        
+
+
+
+
+
+
+        
+        
